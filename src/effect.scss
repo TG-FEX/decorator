@@ -1,0 +1,18 @@
+//¾Û½¹Ð§¹û
+@mixin grow {
+  border-color: $effect-grow-border-color !important;
+  box-shadow: 0 0 5px $effect-grow-color !important;
+}
+
+@mixin disabled {
+  filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  color: #A0A0A0;
+  -webkit-filter: grayscale(100%);
+  cursor: not-allowed;
+}
+
+@mixin error {
+  -moz-animation: error 1s ease-in;
+  -webkit-animation: error 1s ease-in;
+  animation: error 1s ease-in-out;
+}

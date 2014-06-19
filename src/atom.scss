@@ -1,0 +1,47 @@
+.clearfix,.cf {
+  @include clearfix;
+}
+.cl, .clr { clear:both; }
+.clr { height: 0; @include hide-word;}
+.fl,.fLeft { float: left; }
+.fr,.fRight { float: right;}
+.tc { text-align: center; }
+.tl { text-align: left; }
+.tr { text-align: right; }
+.tj { @include text-justify;}
+.vt { vertical-align:top; }
+.vm { vertical-align:middle; }
+.vb { vertical-align:text-bottom; }
+.hide { display: none; }
+.of-h { overflow: hidden; }
+.d-ib { @include inline-block; }
+.td-ul { text-decoration: underline; }
+.w960,.layout960 {
+  width: 960px;
+  margin: 0 auto;
+  text-align: left;
+}
+.w970,.layout970 {
+  width: 970px;
+  margin: 0 auto;
+  text-align: left;
+}
+.ml-10 { margin-left: 10px; }
+.mr-10 {margin-right: 10px; }
+.mt-10 { margin-top: 10px; }
+.mb-10 { margin-bottom: 10px; }
+.c-369 { color: #369; }
+.c-f60 { color: #f60; }
+.c-333 { color: #333; }
+.c-666 { color: #666; }
+.c-555 { color: #555; }
+.c-888 { color: #888; }
+.c-630 { color: #630; }
+.c-900 { color: #900; }
+.c-f00 { color: #f00; }
+.cOrg { color: #f60;}
+.f12 { font-size: 12px; }
+.f14 { font-size: 14px; }
+.f16 { font-size: 16px; }
+
+.fw-b {font-weight: bold;}

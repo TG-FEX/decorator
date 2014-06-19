@@ -1,0 +1,36 @@
+@mixin alert-state ($i) {
+  color: nth($alert-font-color, $i);
+  background-color: nth($alert-bg-color, $i);
+  border-color: nth($alert-bd-color, $i);
+}
+@mixin alert-size ($i) {
+  font-size: nth($alert-font-size, $i);
+  $l: nth($alert-size, $i) - nth($alert-line-height, $i) - 2;
+  $pd-t: floor($l / 2);
+  $pd-b: $l - $pd-t;
+  line-height: nth($alert-line-height, $i);
+  padding: $pd-t nth($alert-padding-rl, $i) $pd-b nth($alert-padding-rl, $i);
+}
+
+@mixin alert($width: auto){
+  $border-size: 1px;
+  border: $border-size solid;
+  vertical-align: middle;
+  @if ($width != 'auto') {
+    width: adjust-box-size($width, 1px*2);
+  }
+
+  @for $i from 1 through length($alert-state-name) {
+    $selector: create-selector(nth($alert-state-name, $i), $alert-prefix);
+    &#{$selector} {
+      @include alert-state($i);
+    }
+  }
+
+  @for $i from 1 through length($alert-size-name) {
+    $szselector: create-selector(nth($alert-size-name, $i), $alert-prefix);
+    &#{$szselector} {
+      @include alert-size($i);
+    }
+  }
+}

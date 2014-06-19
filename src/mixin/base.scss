@@ -1,0 +1,197 @@
+
+// 根据包括盒子padding，border的总高宽度计算具体高宽度
+@function adjust-box-size ($size, $padding-size: 10px, $border-size: 0px) {
+  @return $size - $padding-size - $border-size;
+}
+
+// 隐藏文字
+@mixin hide-word{
+  font-size: 0;
+  line-height: 0;
+}
+// 将元素设为inline-block
+@mixin inline-block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+// 调整浏览器的垂直对齐方式
+@mixin adjust-vertical($height, $lineHeight:$default-line-height){
+  // 常规浏览器以对齐行顶部加上margin-top；
+  margin-top: ($lineHeight - $height)/ 2;
+  *margin-top: 0;
+  _margin-top: ($lineHeight - $height)/ 2;
+  _margin-bottom: ($lineHeight - $height)/2;
+
+}
+
+// 将非浮动元素垂直居中
+@mixin place-middle($height, $lineHeight:$default-line-height) {
+  vertical-align: top;
+  *vertical-align: middle;
+
+  @include adjust-vertical($height, $lineHeight);
+}
+
+// 将浮动元素垂直居中
+@mixin float-place-middle($height:$default-font-size, $boxHeight:$default-line-height){
+  margin-top: ($boxHeight - $height)/ 2;
+}
+@mixin select-place-middle($lineHeight:$default-line-height) {
+  *height: 20px;
+  *margin-top: ($lineHeight - 20px) / 2;
+  _margin-bottom: ($lineHeight - 20px) / 2;
+}
+
+// 将check类型垂直居中
+@mixin check-place-middle($lineHeight:$default-line-height, $boxHeight:$lineHeight){
+  *margin-top: 0;
+  _margin-top: ($lineHeight - 13px) / 2;
+  _margin-bottom: ($boxHeight - 13px)/2;
+  vertical-align: middle;
+}
+// 将某个元素看似按钮
+@mixin button-like(){
+  @include inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  text-decoration: none;
+  span, s, i, b {
+    cursor: pointer;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+  }
+}
+// 将某个元素看起来像图标
+@mixin icon-like (){
+  overflow: hidden;
+  @include inline-block;
+}
+@mixin with-button-ajustment($height, $font-size: $default-font-size, $border-width: 1px){
+  $line-height: $font-size + 2px;
+  $pd-tb: ($height - $border-width * 2 - $line-height) / 2;
+  line-height: $line-height;
+  height: $height;
+  padding: {
+    top: $pd-tb;
+    bottom: $pd-tb;
+  };
+  *padding-top: $pd-tb - 1px;
+  *padding-bottom: $pd-tb + 1px;
+  _padding-bottom: $pd-tb - 2px;
+}
+// 调整button标签的高度，使其垂直居中;
+@mixin adjust-button-height($height, $font-size: $default-font-size, $border-width: 1px) {
+  @include box-sizing(border-box);
+  overflow: visible;
+  @include with-button-ajustment($height, $font-size, $border-width);
+}
+// 清除元素浮动
+@mixin clearfix {
+  zoom: 1;
+  &:before, &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 元素两端对齐
+@mixin text-justify {
+  text-align:justify;
+  /*ie6-8*/
+  text-justify:distribute-all-lines;
+  /* ie9*/
+  text-align-last:justify;
+  /*ff*/
+  -moz-text-align-last:justify;
+  /*chrome 20+*/
+  -webkit-text-align-last:justify;
+  &:after {
+    content:".";
+    display: inline-block;
+    width:100%;
+    overflow:hidden;
+    height:0;
+  }
+}
+
+// 调整盒子大小定义模式
+@mixin box-sizing($sizing){
+  -moz-box-sizing: $sizing;
+  -webkit-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+
+// 设置单行文字高度
+@mixin single-line-height($height) {
+  line-height: $height;
+  height: $height;
+}
+
+// IE9去掉滤镜
+@mixin f-IE9-filter-none {
+  &:nth-of-type(1n) { filter:none; }
+}
+
+// 透明度
+@mixin opacity($value:.5){
+  opacity: $value;
+  filter: alpha(Opacity=$value*100);
+}
+
+@mixin flip($d:h) {
+  @if $d == y {
+    -moz-transform:scaleY(-1);
+    -webkit-transform:scaleY(-1);
+    -o-transform:scaleY(-1);
+    transform:scaleY(-1);
+    filter:FlipV;
+  } @else {
+    -moz-transform:scaleX(-1);
+    -webkit-transform:scaleX(-1);
+    -o-transform:scaleX(-1);
+    transform:scaleX(-1);
+    filter:FlipH;
+  }
+}
+
+@mixin vertical-gradient($form, $to){
+  background-image: -moz-linear-gradient($form, $to);
+  background-image: -webkit-linear-gradient($form,$to);
+  background-image: -o-linear-gradient($form,$to);
+  background-image: -ms-linear-gradient($form,$to);
+  background-image: linear-gradient($form,$to);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#{ie-hex-str($form)}', endColorstr='#{ie-hex-str($to)}');
+}
+@mixin horizontal-gradient($form, $to){
+  background-image: -moz-linear-gradient(right, $form, $to);
+  background-image: -webkit-linear-gradient(left, $form, $to);
+  background-image: -o-linear-gradient(right, $form,$to);
+  background-image: -ms-linear-gradient(right, $form,$to);
+  background-image: linear-gradient(to right,$form,$to);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#{ie-hex-str($form)}', endColorstr='#{ie-hex-str($to)}');
+}
+
+//根据图标类型 获取位置
+@function  vertical-splites($i, $grid-size: 25px, $offsetX:0, $offsetY: 0){
+  @return $offsetX ($grid-size*-$i)+$offsetY;
+}
+@function vertical-splites-position($list, $type, $grid-size:25px, $offsetX:0, $offsetY:0) {
+  $i: index($list, $type) - 1;
+  @if ($i == -1) {
+    $i: 0;
+  }
+  @return vertical-splites($i, $grid-size, $offsetX, $offsetY);
+}
+
+@mixin ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

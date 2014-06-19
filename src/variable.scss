@@ -1,0 +1,119 @@
+$default-img-src-base: 'http://img.tgimg.cn/bbs/topic/master-show/' !default;
+
+@function img-url($url, $burl: $default-img-src-base) {
+  @return url($burl + $url);
+}
+
+@function create-selector($s, $prefix) {
+  @if $s == '' { @return $s}
+  @return $prefix + '-' + $s;
+}
+
+@function create-u-selector($s, $prefix:':') {
+  @if $s == '' { @return $s}
+  @return $prefix + $s;
+}
+
+$ui-state-name: '', 'strong', 'info' !default;
+$ui-size-name: '', 'sm', 'lg', 'xlg' !default;
+
+$ui-height-multiple: 1, 0.786, 1.143, 1.25 !default;
+$ui-font-size: 12px, 12px, 14px, 16px !default;
+$ui-size: 28px, 22px, 32px, 35px !default;
+$ui-line-height: 24px, 18px, 26px, 28px !default;
+
+$default-line-height: nth($ui-line-height, 1) !default;
+$default-font-size: nth($ui-font-size, 1) !default;
+
+
+// form
+
+$textbox-placeholder-color: #DDD !default;
+$textbox-state-name: '', 'error' !default;
+$textbox-prefix: '.txtbox' !default;
+$textbox-bd-color: #CCC, #F00 !default;
+$textbox-bg-color: #FFF, #FFE9E9 !default;
+$textbox-font-color: #555, #F00 !default;
+
+
+$textbox-font-size: $ui-font-size !default;
+$textbox-padding-rl: .5em, .5em, .75em, 1em !default;
+
+$textbox-size-name: $ui-size-name !default;
+$textbox-size: $ui-size !default;
+$textbox-radius-size: 2px !default;
+$textbox-bd-size: 1px !default;
+$textbox-line-height: $ui-line-height !default;
+
+$checklist-interval-size: 5px !default;
+$checklist-prefix: '.cklist' !default;
+
+$form-vertical-prefix: '.frm-v' !default;
+$effect-grow-color: #799bd2 !default;
+
+$select-padding-r: 1px !default;
+// icon
+
+$icon-grid-size: 40px !default;
+$icon-prefix: '.ico' !default;
+$icon-size-name: $ui-size-name !default;
+$icon-size: 16px, 12px, 22px, 36px !default;
+$icon-url: img-url('ico.png'), img-url('ico-sm.png'), img-url('ico-lg.png'), img-url('ico-xlg.png') !default;
+$icon-map: edit, ding, tqq, tsina !default;
+
+// button
+$btn-grid-size: 40px !default;
+$btn-bd-size: 1px !default;
+$btn-radius-size: 2px !default;
+$btn-prefix: '.btn' !default;
+$btn-state-name: '', 'primary', 'info' !default;
+
+$btn-bg-color: #F3F3F3, #37BD6F, #FFE9E9 !default;
+$btn-font-color: #555, #FFF, #D96458 !default;
+$btn-bd-color:
+  darken(nth($btn-bg-color, 1), 10%),
+  darken(nth($btn-bg-color, 2), 10%),
+  darken(nth($btn-bg-color, 3), 10%) !default;
+$btn-ustate-name: '', 'hover', 'active' !default;
+
+
+$btn-font-size: 12px, 12px, 14px, 16px !default;
+$btn-padding-rl: 1em, .75em, 1.2em, 2em !default;
+
+$btn-size-name: $ui-size-name !default;
+$btn-size: $ui-size !default;
+$btn-line-height: $ui-line-height !default;
+
+$btn-bg-url:
+  img-url('btn.png'),
+  img-url('btn-sm.png'),
+  img-url('btn-lg.png'),
+  img-url('btn-xlg.png') !default;
+
+//effect
+$effect-grow-border-color: #369 !default;
+$effect-grow-border: #369 !default;
+
+//combination
+$form-vertical-interval: 8px !default;
+$form-vertical-label-width: 120px !default;
+$form-vertical-label-padding-r: 10px !default;
+$element-menu-interval: 10px !default;
+
+//UI
+$alert-state-name: '', 'error' !default;
+$alert-prefix: '.alert' !default;
+$alert-size-name: '', 'sm', 'lg', 'xlg' !default;
+
+$alert-bd-color: #CCC, #F00 !default;
+$alert-bg-color: #FFF, #FFE9E9 !default;
+$alert-font-color: #555, #F00 !default;
+
+$alert-padding-rl: .5em, .5em, .75em, 1em !default;
+$alert-font-size: $ui-font-size !default;
+$alert-padding-rl: .5em, .5em, .75em, 1em !default;
+
+$alert-size-name: $ui-size-name !default;
+$alert-size: $ui-size !default;
+$alert-line-height: $ui-line-height !default;
+

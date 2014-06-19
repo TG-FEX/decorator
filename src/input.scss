@@ -1,0 +1,155 @@
+
+@mixin input-error-animate {
+  @for $i from 1 through length($textbox-state-name) {
+    $name:nth($textbox-state-name, $i);
+    @if $name == '' {
+      $textbox-default-bd-color: nth($textbox-bd-color, $i) !global;
+    }
+    @if $name == 'error' {
+      $textbox-error-bd-color: nth($textbox-bd-color, $i) !global;
+    }
+  }
+  0% {
+    border-color: $textbox-error-bd-color;
+  }
+  25% {
+    border-color: $textbox-default-bd-color;
+  }
+  50% {
+    border-color: $textbox-error-bd-color;
+  }
+  75% {
+    border-color: $textbox-default-bd-color;
+  }
+  100% {
+    border-color: $textbox-error-bd-color;
+  }
+}
+
+@mixin textbox-state ($i) {
+  color: nth($textbox-font-color, $i);
+  background-color: nth($textbox-bg-color, $i);
+  border-color: nth($textbox-bd-color, $i);
+}
+@mixin textbox-size ($i) {
+  font-size: nth($textbox-font-size, $i);
+  $l: nth($textbox-size, $i) - nth($textbox-line-height, $i) - $textbox-bd-size * 2;
+  $pd-t: floor($l / 2);
+  $pd-b: $l - $pd-t;
+  line-height: nth($textbox-line-height, $i);
+  padding: $pd-t nth($textbox-padding-rl, $i) $pd-b nth($textbox-padding-rl, $i);
+}
+@mixin textbox-state-mapping($state){
+  @include textbox-state(index($textbox-state-name, $state))
+}
+
+// 基础输入类型的样式
+@mixin textbox-like($width: auto) {
+  $border-size: $textbox-bd-size;
+  @include inline-block;
+  @include box-sizing(content-box);
+
+  vertical-align: middle;
+  border-radius: $textbox-radius-size;
+  overflow: hidden;
+  border: $border-size solid;
+  @if ($width != 'auto') {
+    width: adjust-box-size($width, $border-size*2);
+  }
+
+  @for $i from 1 through length($textbox-state-name) {
+    $selector: create-selector(nth($textbox-state-name, $i), $textbox-prefix);
+    &#{$selector} {
+      @include textbox-state($i);
+    }
+  }
+
+  @for $i from 1 through length($textbox-size-name) {
+    $szselector: create-selector(nth($textbox-size-name, $i), $textbox-prefix);
+    &#{$szselector} {
+      @include textbox-size($i);
+    }
+  }
+
+  &[readonly], &.readonly, &[disabled], &.disabled {
+    background-color: #EEE;
+  }
+  &[disabled], &.disabled {
+    @include disabled;
+  }
+  &:focus {
+    @include grow;
+  }
+}
+
+
+@mixin input-like($width: auto) {
+  @include textbox-like($width);
+  @for $i from 1 through length($textbox-size-name) {
+    $szselector: create-selector(nth($textbox-size-name, $i), $textbox-prefix);
+    &#{$szselector} {
+      height: nth($textbox-line-height, $i);
+    }
+  }
+}
+
+@mixin input($width: auto){
+  cursor: text;
+  @include input-like($width);
+  @include placeholder(#888);
+}
+
+@mixin textbox($width: auto) {
+  cursor: text;
+  @include input-like($width);
+  @include placeholder(#888);
+}
+
+@mixin select($width: auto) {
+  cursor: pointer;
+  @include textbox-like($width);
+  padding: {
+    right: $select-padding-r !important;
+    top: $select-padding-r !important;
+    bottom: $select-padding-r !important;
+  }
+  @for $i from 1 through length($textbox-size-name) {
+    $szselector: create-selector(nth($textbox-size-name, $i), $textbox-prefix);
+    &#{$szselector} {
+      $size: nth($textbox-size, $i);
+      $inner-height: $size - 2 * $select-padding-r - 2 * $textbox-bd-size;
+      @include single-line-height($inner-height);
+      @include select-place-middle($size);
+    }
+  }
+}
+
+@mixin placeholder($color: $textbox-placeholder-color){
+  &::-moz-placeholder {
+    color: $color !important;
+    opacity: 1;
+  }
+  &:-moz-placeholder {
+    color: $color !important;
+    opacity: 1;
+  }
+  &::-webkit-input-placeholder {
+    color: $color !important;
+  }
+  &:-ms-input-placeholder {
+    color: $color !important;
+  }
+  &.placeholder {color: $color !important;}
+}
+
+@mixin checkbox($size: 13px) {
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  width: $size;
+  height: $size;
+  &:focus {
+    box-shadow: none !important;
+  }
+}

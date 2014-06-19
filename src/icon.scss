@@ -1,0 +1,23 @@
+@mixin icon-mapping($s-name, $offset-x:0, $offset-y:0) {
+  background-position: vertical-splites-position($icon-map, $s-name, $icon-grid-size, $offset-x, $offset-y);
+}
+@mixin icon {
+  @include inline-block;
+  @for $i from 1 through length($icon-size-name) {
+    &#{create-selector(nth($icon-size-name, $i), $icon-prefix)} {
+      width: nth($icon-size, $i);
+      height: nth($icon-size, $i);
+      line-height: nth($icon-size, $i);
+      background-image: nth($icon-url, $i);
+
+    }
+  }
+
+
+  @for $i from 1 through length($icon-map) {
+    $s-name: nth($icon-map, $i);
+    &#{create-selector($s-name, $icon-prefix)} {
+      background-position: vertical-splites($i, $icon-grid-size);
+    }
+  }
+}
