@@ -1,0 +1,23 @@
+{
+    "name": "decorator",
+    "version": "0.5",
+    "main": [
+        "src/decorator.scss"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "build",
+        "speed",
+        "test",
+        "*.md",
+        "AUTHORS.txt",
+        "Gruntfile.js",
+        "package.json"
+    ],
+    "keywords": [
+        "decorator",
+        "scss",
+        "library"
+    ]
+}
