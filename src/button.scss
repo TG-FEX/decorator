@@ -25,7 +25,7 @@
 }
 @mixin button-state-mapping ($name) {
   $i: index($btn-state-name, $name);
-  @include button-state($i);
+  @include button-state($i)
 }
 @mixin button-size ($i) {
   font-size: nth($btn-font-size, $i);
