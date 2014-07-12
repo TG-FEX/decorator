@@ -25,7 +25,7 @@
 }
 @mixin button-state-mapping ($name) {
   $i: index($btn-state-name, $name);
-  @include button-index-state($i)
+  @include button-state($i);
 }
 @mixin button-size ($i) {
   font-size: nth($btn-font-size, $i);
@@ -68,7 +68,7 @@
   @for $i from 1 through length($btn-size-name) {
     $szselector: create-selector(nth($btn-size-name, $i), $btn-prefix);
     &#{$szselector} {
-      @include button-index-size($i);
+      @include button-size($i);
     }
   }
 
