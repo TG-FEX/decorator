@@ -17,7 +17,7 @@
   @for $i from 1 through length($icon-map) {
     $s-name: nth($icon-map, $i);
     &#{create-selector($s-name, $icon-prefix)} {
-      background-position: vertical-splites($i, $icon-grid-size);
+      @include icon-mapping($s-name);
     }
   }
 }
