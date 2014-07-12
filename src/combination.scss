@@ -47,7 +47,9 @@
   @for $i from 1 through length($textbox-size-name) {
     $szselector: create-selector(nth($textbox-size-name, $i), $form-vertical-prefix);
     $size: nth($textbox-size, $i);
-    font-size: nth($textbox-font-size, $i);
+    &#{$szselector} {
+      font-size: nth($textbox-font-size, $i);
+    }
     &#{$szselector} th {
       min-height: $form-vertical-interval + $size;
       height: $form-vertical-interval + $size;
