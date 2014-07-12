@@ -31,6 +31,11 @@
   background-color: nth($textbox-bg-color, $i);
   border-color: nth($textbox-bd-color, $i);
 }
+
+@mixin textbox-state-mapping($state){
+  @include textbox-state(index($textbox-state-name, $state))
+}
+
 @mixin textbox-size ($i) {
   font-size: nth($textbox-font-size, $i);
   $l: nth($textbox-size, $i) - nth($textbox-line-height, $i) - $textbox-bd-size * 2;
@@ -43,7 +48,7 @@
   @include textbox-state(index($textbox-state-name, $state))
 }
 
-// »ù´¡ÊäÈëÀàÐÍµÄÑùÊ½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½Ê½
 @mixin textbox-like($width: auto) {
   $border-size: $textbox-bd-size;
   @include inline-block;
