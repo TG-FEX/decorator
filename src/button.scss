@@ -11,7 +11,7 @@
   }
 }
 
-@mixin button-index-state ($i) {
+@mixin button-state ($i) {
   background-color: nth($btn-bg-color, $i);
   border-color: nth($btn-bd-color, $i);
   color: nth($btn-font-color, $i);
@@ -23,7 +23,7 @@
     }
   }
 }
-@mixin button-state($name) {
+@mixin button-state-mapping ($name) {
   $i: index($btn-state-name, $name);
   @include button-index-state($i)
 }
