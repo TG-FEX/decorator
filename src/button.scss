@@ -11,12 +11,22 @@
   }
 }
 
-@mixin button-state ($i) {
+@mixin button-index-state ($i) {
   background-color: nth($btn-bg-color, $i);
   border-color: nth($btn-bd-color, $i);
   color: nth($btn-font-color, $i);
+  @for $j from 1 through length($btn-ustate-name) {
+    $uselector: create-u-selector(nth($btn-ustate-name, $j));
+    &#{$uselector} {
+      background-position: vertical-splites($j - 1 + ($i - 1) * length($btn-ustate-name), $btn-grid-size);
+      color: nth($btn-font-color, $i);
+    }
+  }
 }
-
+@mixin button-state($name) {
+  $i: index($btn-state-name, $name);
+  @include button-index-state($i)
+}
 @mixin button-size ($i) {
   font-size: nth($btn-font-size, $i);
   $l: nth($btn-size, $i) - nth($btn-line-height, $i) - $btn-bd-size * 2;
@@ -32,7 +42,7 @@
   background-image: nth($btn-bg-url, $i);
 }
 
-// »ù´¡°´Å¥ÑùÊ½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½Ê½
 @mixin button($width: auto) {
 
   outline: none;
@@ -53,20 +63,12 @@
     &#{$selector} {
       @include button-state($i);
     }
-
-    @for $j from 1 through length($btn-ustate-name) {
-      $uselector: create-u-selector(nth($btn-ustate-name, $j));
-      &#{$selector + $uselector} {
-        background-position: vertical-splites($j - 1 + ($i - 1) * length($btn-ustate-name), $btn-grid-size);
-        color: nth($btn-font-color, $i);
-      }
-    }
   }
 
   @for $i from 1 through length($btn-size-name) {
     $szselector: create-selector(nth($btn-size-name, $i), $btn-prefix);
     &#{$szselector} {
-      @include button-size($i);
+      @include button-index-size($i);
     }
   }
 
@@ -78,6 +80,7 @@
 
   &:hover {
     cursor: pointer;
+    text-decoration: none;
   }
 
   &:active {
