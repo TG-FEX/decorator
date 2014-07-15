@@ -75,7 +75,7 @@
 
 @mixin button($width: auto) {
   @include button-like();
-
+  white-space: nowrap;
   outline: none;
   overflow-y: hidden;
   box-shadow: $btn-shadow;
