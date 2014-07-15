@@ -23,7 +23,7 @@
         background-position: vertical-splites($j - 1 + ($i - 1) * length($btn-ustate-name), $btn-grid-size);
       }
     }
-  } @else if($btn-type = 'gradient') {
+  } @else if($btn-type == 'gradient') {
     $s: nth($btn-gradient-table, $i);
     @for $j from 1 through length($btn-ustate-name) {
       $su: nth($s, $j);
