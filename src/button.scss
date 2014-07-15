@@ -24,8 +24,10 @@
   @if (length($btn-font-color) >= $i) {
     color: nth($btn-font-color, $i);
   }
-  @if ($btn-type == '') {
+  @if (length(background-color) >= $i) {
     background-color: nth($btn-bg-color, $i);
+  }
+  @if ($btn-type == '') {
     @for $j from 1 through length($btn-ustate-name) {
       $uselector: create-u-selector(nth($btn-ustate-name, $j));
       &#{$uselector} {
