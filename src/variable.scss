@@ -67,7 +67,7 @@ $btn-bd-size: 1px !default;
 $btn-radius-size: 2px !default;
 $btn-prefix: '.btn' !default;
 $btn-state-name: '', 'primary', 'info' !default;
-$btn-box-shadow: 0 1px 1px 0 rgba(0,0,0,.2) !default;
+$btn-shadow: 0 1px 1px 0 rgba(0,0,0,.2) !default;
 
 $btn-bg-color: #F3F3F3, #37BD6F, #FFE9E9 !default;
 $btn-font-color: #555, #FFF, #D96458 !default;
@@ -90,6 +90,12 @@ $btn-bg-url:
   img-url('btn-sm.png'),
   img-url('btn-lg.png'),
   img-url('btn-xlg.png') !default;
+
+$btn-type: 'gradient';
+$btn-gradient-table:
+  ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
+  ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
+  ((#F8A20E, #F4A01B),(#E18A00, #E18A00),(#E18A00, #E18A00)) !default;
 
 //effect
 $effect-grow-border-color: #369 !default;
