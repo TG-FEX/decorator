@@ -12,7 +12,15 @@
 }
 
 @mixin button-state ($i) {
-  border-color: nth($btn-bd-color, $i);
+  $bd-color: nth($btn-bd-color, $i);
+  @if (type-of($bd-color) == 'list') {
+    border-top-color: nth($bd-color, 1);
+    border-right-color: nth($bd-color, 2);
+    border-bottom-color: nth($bd-color, 3);
+    border-left-color: nth($bd-color, 4);
+  } @else {
+    border-color: $bd-color;
+  }
   color: nth($btn-font-color, $i);
 
   @if ($btn-type == '') {
