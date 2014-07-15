@@ -21,8 +21,9 @@
   } @else {
     border-color: $bd-color;
   }
-  color: nth($btn-font-color, $i);
-
+  @if (length($btn-font-color) >= $i) {
+    color: nth($btn-font-color, $i);
+  }
   @if ($btn-type == '') {
     background-color: nth($btn-bg-color, $i);
     @for $j from 1 through length($btn-ustate-name) {
