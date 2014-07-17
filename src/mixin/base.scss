@@ -1,24 +1,24 @@
-
-// ¸ù¾İ°üÀ¨ºĞ×Ópadding£¬borderµÄ×Ü¸ß¿í¶È¼ÆËã¾ßÌå¸ß¿í¶È
+ï»¿
+// æ ¹æ®åŒ…æ‹¬ç›’å­paddingï¼Œborderçš„æ€»é«˜å®½åº¦è®¡ç®—å…·ä½“é«˜å®½åº¦
 @function adjust-box-size ($size, $padding-size: 10px, $border-size: 0px) {
   @return $size - $padding-size - $border-size;
 }
 
-// Òş²ØÎÄ×Ö
+// éšè—æ–‡å­—
 @mixin hide-word{
   font-size: 0;
   line-height: 0;
 }
-// ½«ÔªËØÉèÎªinline-block
+// å°†å…ƒç´ è®¾ä¸ºinline-block
 @mixin inline-block {
   display: inline-block;
   *display: inline;
   *zoom: 1;
 }
 
-// µ÷Õûä¯ÀÀÆ÷µÄ´¹Ö±¶ÔÆë·½Ê½
+// è°ƒæ•´æµè§ˆå™¨çš„å‚ç›´å¯¹é½æ–¹å¼
 @mixin adjust-vertical($height, $lineHeight:$default-line-height){
-  // ³£¹æä¯ÀÀÆ÷ÒÔ¶ÔÆëĞĞ¶¥²¿¼ÓÉÏmargin-top£»
+  // å¸¸è§„æµè§ˆå™¨ä»¥å¯¹é½è¡Œé¡¶éƒ¨åŠ ä¸Šmargin-topï¼›
   margin-top: ($lineHeight - $height)/ 2;
   *margin-top: 0;
   _margin-top: ($lineHeight - $height)/ 2;
@@ -26,7 +26,7 @@
 
 }
 
-// ½«·Ç¸¡¶¯ÔªËØ´¹Ö±¾ÓÖĞ
+// å°†éæµ®åŠ¨å…ƒç´ å‚ç›´å±…ä¸­
 @mixin place-middle($height, $lineHeight:$default-line-height) {
   vertical-align: top;
   *vertical-align: middle;
@@ -34,7 +34,7 @@
   @include adjust-vertical($height, $lineHeight);
 }
 
-// ½«¸¡¶¯ÔªËØ´¹Ö±¾ÓÖĞ
+// å°†æµ®åŠ¨å…ƒç´ å‚ç›´å±…ä¸­
 @mixin float-place-middle($height:$default-font-size, $boxHeight:$default-line-height){
   margin-top: ($boxHeight - $height)/ 2;
 }
@@ -44,14 +44,14 @@
   _margin-bottom: ($lineHeight - 20px) / 2;
 }
 
-// ½«checkÀàĞÍ´¹Ö±¾ÓÖĞ
+// å°†checkç±»å‹å‚ç›´å±…ä¸­
 @mixin check-place-middle($lineHeight:$default-line-height, $boxHeight:$lineHeight){
   *margin-top: 0;
   _margin-top: ($lineHeight - 13px) / 2;
   _margin-bottom: ($boxHeight - 13px)/2;
   vertical-align: middle;
 }
-// ½«Ä³¸öÔªËØ¿´ËÆ°´Å¥
+// å°†æŸä¸ªå…ƒç´ çœ‹ä¼¼æŒ‰é’®
 @mixin button-like(){
   @include inline-block;
   vertical-align: middle;
@@ -63,7 +63,7 @@
     -webkit-user-select:none;
   }
 }
-// ½«Ä³¸öÔªËØ¿´ÆğÀ´ÏñÍ¼±ê
+// å°†æŸä¸ªå…ƒç´ çœ‹èµ·æ¥åƒå›¾æ ‡
 @mixin icon-like (){
   overflow: hidden;
   @include inline-block;
@@ -81,13 +81,13 @@
   *padding-bottom: $pd-tb + 1px;
   _padding-bottom: $pd-tb - 2px;
 }
-// µ÷Õûbutton±êÇ©µÄ¸ß¶È£¬Ê¹Æä´¹Ö±¾ÓÖĞ;
+// è°ƒæ•´buttonæ ‡ç­¾çš„é«˜åº¦ï¼Œä½¿å…¶å‚ç›´å±…ä¸­;
 @mixin adjust-button-height($height, $font-size: $default-font-size, $border-width: 1px) {
   @include box-sizing(border-box);
   overflow: visible;
   @include with-button-ajustment($height, $font-size, $border-width);
 }
-// Çå³ıÔªËØ¸¡¶¯
+// æ¸…é™¤å…ƒç´ æµ®åŠ¨
 @mixin clearfix {
   zoom: 1;
   &:before, &:after {
@@ -101,7 +101,7 @@
   }
 }
 
-// ÔªËØÁ½¶Ë¶ÔÆë
+// å…ƒç´ ä¸¤ç«¯å¯¹é½
 @mixin text-justify {
   text-align:justify;
   /*ie6-8*/
@@ -121,25 +121,25 @@
   }
 }
 
-// µ÷ÕûºĞ×Ó´óĞ¡¶¨ÒåÄ£Ê½
+// è°ƒæ•´ç›’å­å¤§å°å®šä¹‰æ¨¡å¼
 @mixin box-sizing($sizing){
   -moz-box-sizing: $sizing;
   -webkit-box-sizing: $sizing;
   box-sizing: $sizing;
 }
 
-// ÉèÖÃµ¥ĞĞÎÄ×Ö¸ß¶È
+// è®¾ç½®å•è¡Œæ–‡å­—é«˜åº¦
 @mixin single-line-height($height) {
   line-height: $height;
   height: $height;
 }
 
-// IE9È¥µôÂË¾µ
+// IE9å»æ‰æ»¤é•œ
 @mixin f-IE9-filter-none {
   &:nth-of-type(1n) { filter:none; }
 }
 
-// Í¸Ã÷¶È
+// é€æ˜åº¦
 @mixin opacity($value:.5){
   opacity: $value;
   filter: alpha(Opacity=$value*100);
@@ -178,7 +178,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#{ie-hex-str($form)}', endColorstr='#{ie-hex-str($to)}');
 }
 
-//¸ù¾İÍ¼±êÀàĞÍ »ñÈ¡Î»ÖÃ
+//æ ¹æ®å›¾æ ‡ç±»å‹ è·å–ä½ç½®
 @function  vertical-splites($i, $grid-size: 25px, $offsetX:0, $offsetY: 0){
   @return $offsetX ($grid-size*-$i)+$offsetY;
 }

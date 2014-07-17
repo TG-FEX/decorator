@@ -1,0 +1,9 @@
+@import "../src/decorator";
+$list: 1;
+a {
+  @include button()
+  //content: nth($list, 2);
+  //content: nth(nth(nth($btn-gradient-table,1),1),1);
+  //content: type-of($btn-gradient-table);
+  //content: $btn-radius-size;
+}
