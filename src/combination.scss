@@ -25,25 +25,17 @@
   padding: 10px 10px 20px;
   th {
     text-align: right;
-    padding-right: $form-vertical-label-padding-r;
-    width: $form-vertical-label-width;
     font-weight: lighter;
   }
   th, td {
     vertical-align: top;
     @include box-sizing(content-box);
   }
-  td {
-    padding-bottom: $form-vertical-interval;
-  }
+
   input, select {
     vertical-align: top;
   }
-  .form-menu {
-    margin-top: 20px;
-    margin-left: $form-vertical-label-width + $form-vertical-label-padding-r;
-  }
-
+  $label-width: nth($form-vertical-label-width, 1);
   @for $i from 1 through length($textbox-size-name) {
     $szselector: create-selector(nth($textbox-size-name, $i), $form-vertical-prefix);
     $size: nth($textbox-size, $i);
@@ -51,11 +43,35 @@
       font-size: nth($textbox-font-size, $i);
     }
     &#{$szselector} th {
-      min-height: $form-vertical-interval + $size;
-      height: $form-vertical-interval + $size;
+      @if (length($form-vertical-label-padding-r) >= $i) {
+        padding-right: nth($form-vertical-label-padding-r, $i);
+      }
+      @if (length($form-vertical-label-width) >= $i) {
+        width: nth($form-vertical-label-width, $i);
+      }
+      @if (length($form-vertical-interval) >= $i) {
+        min-height: nth($form-vertical-interval, $i) + $size;
+        height: nth($form-vertical-interval, $i) + $size;
+      }
     }
     &#{$szselector} th, &#{$szselector} td {
       line-height: $size;
+    }
+    &#{$szselector} td {
+      @if (length($form-vertical-interval) >= $i) {
+        padding-bottom: nth($form-vertical-interval, $i);
+      }
+    }
+    &#{$szselector} .form-menu {
+      @if (length($form-vertical-menu-margin-t) >= $i) {
+        margin-top: nth($form-vertical-menu-margin-t, $i);
+      }
+      @if (length($form-vertical-label-padding-r) >= $i) {
+        @if (length($form-vertical-label-width) > $i) {
+          $label-width: nth($form-vertical-label-width, $i)
+        }
+        margin-left: $label-width + nth($form-vertical-label-padding-r, $i);
+      }
     }
   }
 

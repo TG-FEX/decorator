@@ -24,7 +24,7 @@
   @if (length($btn-font-color) >= $i) {
     color: nth($btn-font-color, $i);
   }
-  @if (length(background-color) >= $i) {
+  @if (length($btn-bg-color) >= $i) {
     background-color: nth($btn-bg-color, $i);
   }
   @if ($btn-type == '') {
