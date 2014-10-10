@@ -38,10 +38,22 @@
 @mixin float-place-middle($height:$default-font-size, $boxHeight:$default-line-height){
   margin-top: ($boxHeight - $height)/ 2;
 }
-@mixin select-place-middle($lineHeight:$default-line-height) {
+@mixin select-place-middle($lineHeight:$default-line-height, $fix-ie7:true) {
   *height: 20px;
-  *margin-top: ($lineHeight - 20px) / 2;
+  @if ($fix-ie7) {
+    *margin-top: ($lineHeight - 20px) / 2;
+  } @else {
+    _margin-top: ($lineHeight - 20px) / 2;
+  }
+
   _margin-bottom: ($lineHeight - 20px) / 2;
+}
+@mixin fix-ie7-select-height ($height, $font-size){
+  $t: $height / 20px;
+  *zoom: $t;
+  _zoom: 1;
+  *font-size: $font-size / $t;
+  _font-size: $font-size;
 }
 
 // 将check类型垂直居中

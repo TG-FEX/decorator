@@ -36,12 +36,15 @@
   @include textbox-state(index($textbox-state-name, $state))
 }
 
-@mixin textbox-size ($i) {
+@mixin textbox-size ($i, $line-height:null) {
   font-size: nth($textbox-font-size, $i);
-  $l: nth($textbox-size, $i) - nth($textbox-line-height, $i) - $textbox-bd-size * 2;
+  @if ($line-height == null) {
+    $line-height: nth($textbox-line-height, $i)
+  }
+  $l: nth($textbox-size, $i) - $line-height - $textbox-bd-size * 2;
   $pd-t: floor($l / 2);
   $pd-b: $l - $pd-t;
-  line-height: nth($textbox-line-height, $i);
+  line-height: $line-height;
   padding: $pd-t nth($textbox-padding-rl, $i) $pd-b nth($textbox-padding-rl, $i);
 }
 @mixin textbox-state-mapping($state){
@@ -49,7 +52,7 @@
 }
 
 // �����������͵���ʽ
-@mixin textbox-like($width: auto) {
+@mixin textbox-like($width: auto, $line-height-list: $textbox-line-height, $prefix: $textbox-prefix) {
   $border-size: $textbox-bd-size;
   @include inline-block;
   @include box-sizing(content-box);
@@ -63,16 +66,16 @@
   }
 
   @for $i from 1 through length($textbox-state-name) {
-    $selector: create-selector(nth($textbox-state-name, $i), $textbox-prefix);
+    $selector: create-selector(nth($textbox-state-name, $i), $prefix);
     &#{$selector} {
       @include textbox-state($i);
     }
   }
 
   @for $i from 1 through length($textbox-size-name) {
-    $szselector: create-selector(nth($textbox-size-name, $i), $textbox-prefix);
+    $szselector: create-selector(nth($textbox-size-name, $i), $prefix);
     &#{$szselector} {
-      @include textbox-size($i);
+      @include textbox-size($i, nth($line-height-list, $i));
     }
   }
 
@@ -87,9 +90,10 @@
   }
 }
 
-
-@mixin input-like($width: auto) {
-  @include textbox-like($width);
+@mixin input($width: auto){
+  cursor: text;
+  @include textbox-like($width, $textbox-line-height);
+  @include placeholder(#888);
   @for $i from 1 through length($textbox-size-name) {
     $szselector: create-selector(nth($textbox-size-name, $i), $textbox-prefix);
     &#{$szselector} {
@@ -98,33 +102,22 @@
   }
 }
 
-@mixin input($width: auto){
+@mixin textarea($width: auto) {
   cursor: text;
-  @include input-like($width);
-  @include placeholder(#888);
-}
-
-@mixin textbox($width: auto) {
-  cursor: text;
-  @include input-like($width);
+  @include textbox-like($width);
   @include placeholder(#888);
 }
 
 @mixin select($width: auto) {
   cursor: pointer;
-  @include textbox-like($width);
-  padding: {
-    right: $select-padding-r !important;
-    top: $select-padding-r !important;
-    bottom: $select-padding-r !important;
-  }
+  @include textbox-like($width, $select-line-height, $select-prefix);
   @for $i from 1 through length($textbox-size-name) {
-    $szselector: create-selector(nth($textbox-size-name, $i), $textbox-prefix);
+    $szselector: create-selector(nth($textbox-size-name, $i), $select-prefix);
+    $size: nth($textbox-size, $i);
+    $t: $size / 20px;
     &#{$szselector} {
-      $size: nth($textbox-size, $i);
-      $inner-height: $size - 2 * $select-padding-r - 2 * $textbox-bd-size;
-      @include single-line-height($inner-height);
-      @include select-place-middle($size);
+      @include select-place-middle($size, false);
+      @include fix-ie7-select-height($size, nth($textbox-font-size, $i));
     }
   }
 }

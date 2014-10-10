@@ -45,13 +45,23 @@ $textbox-radius-size: 2px !default;
 $textbox-bd-size: 1px !default;
 $textbox-line-height: $ui-line-height !default;
 
+@function zoom-list($list, $time) {
+  $result: ();
+  @each $item in $list {
+    $result: join($result, round($item * $time));
+  }
+  @return $result;
+}
+
+$select-prefix: $textbox-prefix !default;
+$select-line-height: zoom-list($textbox-font-size, 16 / 12) !default;
+
 $checklist-interval-size: 5px !default;
 $checklist-prefix: '.cklist' !default;
 
 $form-vertical-prefix: '.frm-v' !default;
 $effect-grow-color: #799bd2 !default;
 
-$select-padding-r: 1px !default;
 // icon
 
 $icon-grid-size: 40px !default;
@@ -72,13 +82,13 @@ $btn-shadow: 0 1px 1px 0 rgba(0,0,0,.2) !default;
 $btn-bg-color: #F3F3F3, #37BD6F, #FFE9E9 !default;
 $btn-font-color: #555, #FFF, #D96458 !default;
 $btn-bd-color:
-  darken(nth($btn-bg-color, 1), 10%),
-  darken(nth($btn-bg-color, 2), 10%),
-  darken(nth($btn-bg-color, 3), 10%) !default;
+darken(nth($btn-bg-color, 1), 10%),
+darken(nth($btn-bg-color, 2), 10%),
+darken(nth($btn-bg-color, 3), 10%) !default;
 $btn-ustate-name: '', 'hover', 'active' !default;
 
 
-$btn-font-size: 12px, 12px, 14px, 16px !default;
+$btn-font-size: $ui-font-size !default;
 $btn-padding-rl: 1em, .75em, 1.2em, 2em !default;
 
 $btn-size-name: $ui-size-name !default;
@@ -86,16 +96,16 @@ $btn-size: $ui-size !default;
 $btn-line-height: $ui-line-height !default;
 
 $btn-bg-url:
-  img-url('btn.png'),
-  img-url('btn-sm.png'),
-  img-url('btn-lg.png'),
-  img-url('btn-xlg.png') !default;
+img-url('btn.png'),
+img-url('btn-sm.png'),
+img-url('btn-lg.png'),
+img-url('btn-xlg.png') !default;
 
 $btn-type: '';
 $btn-gradient-table:
-  ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
-  ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
-  ((#F8A20E, #F4A01B),(#E18A00, #E18A00),(#E18A00, #E18A00)) !default;
+        ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
+        ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
+        ((#F8A20E, #F4A01B),(#E18A00, #E18A00),(#E18A00, #E18A00)) !default;
 
 //effect
 $effect-grow-border-color: #369 !default;
