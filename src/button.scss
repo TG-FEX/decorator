@@ -12,24 +12,19 @@
 }
 
 @mixin button-state ($i) {
-  $bd-color: nth($btn-bd-color, $i);
-  @if (type-of($bd-color) == 'list') {
-    border-top-color: nth($bd-color, 1);
-    border-right-color: nth($bd-color, 2);
-    border-bottom-color: nth($bd-color, 3);
-    border-left-color: nth($bd-color, 4);
-  } @else {
-    border-color: $bd-color;
-  }
-
   $s: nth($btn-gradient-table, $i);
   @for $j from 1 through length($btn-ustate-name) {
     $su: nth($s, $j);
     $uselector: create-u-selector(nth($btn-ustate-name, $j));
     &#{$uselector} {
+      @if (length($btn-bd-color) >= $i) {
+        @if (length(nth($btn-bd-color, $i)) >= $j) {
+          border-color: nth(nth($btn-bd-color, $i), $j);
+        }
+      }
       @if (length($btn-font-color) >= $i) {
         @if (length(nth($btn-font-color, $i)) >= $j) {
-          color: nth($btn-font-color, $i);
+          color: nth(nth($btn-font-color, $i), $j);
         }
       }
       @if ($btn-type == '' or $btn-type == 'flatten') {

@@ -156,6 +156,12 @@
   opacity: $value;
   filter: alpha(Opacity=$value*100);
 }
+@mixin bgcolor-transparent($rgba, $blank: url('./blank.png')) {
+  background-color: $rgba;
+  background-image: $blank;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#{ie-hex-str($rgba)}', endColorstr='#{ie-hex-str($rgba)}');
+  @include f-IE9-filter-none;
+}
 
 @mixin flip($d:h) {
   @if $d == y {
