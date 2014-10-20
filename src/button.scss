@@ -21,32 +21,32 @@
   } @else {
     border-color: $bd-color;
   }
-  @if (length($btn-font-color) >= $i) {
-    color: nth($btn-font-color, $i);
-  }
-  @if (length($btn-bg-color) >= $i) {
-    background-color: nth($btn-bg-color, $i);
-  }
-  @if ($btn-type == '') {
-    @for $j from 1 through length($btn-ustate-name) {
-      $uselector: create-u-selector(nth($btn-ustate-name, $j));
-      &#{$uselector} {
-        //增加hover样式
-        color: nth($btn-font-color, $i);
-        background-position: vertical-splites($j - 1 + ($i - 1) * length($btn-ustate-name), $btn-grid-size);
+
+  $s: nth($btn-gradient-table, $i);
+  @for $j from 1 through length($btn-ustate-name) {
+    $su: nth($s, $j);
+    $uselector: create-u-selector(nth($btn-ustate-name, $j));
+    &#{$uselector} {
+      @if (length($btn-font-color) >= $i) {
+        @if (length(nth($btn-font-color, $i)) >= $j) {
+          color: nth($btn-font-color, $i);
+        }
       }
-    }
-  } @else if($btn-type == 'gradient') {
-    $s: nth($btn-gradient-table, $i);
-    @for $j from 1 through length($btn-ustate-name) {
-      $su: nth($s, $j);
-      $uselector: create-u-selector(nth($btn-ustate-name, $j));
-      &#{$uselector} {
+      @if ($btn-type == '' or $btn-type == 'flatten') {
+        //增加hover样式
+        @if (length($btn-bg-color) >= $i) {
+          @if (length(nth($btn-bg-color, $i)) >= $j) {
+            background-color: nth(nth($btn-bg-color, $i), $j);
+          }
+        }
+      }
+      @if ($btn-type == '') {
+        background-position: vertical-splites($j - 1 + ($i - 1) * length($btn-ustate-name), $btn-grid-size);
+      } @else if($btn-type == 'gradient') {
         @include vertical-gradient(nth($su, 1), nth($su, 2))
       }
     }
   }
-
 }
 @mixin button-state-mapping ($name) {
   $i: index($btn-state-name, $name);
