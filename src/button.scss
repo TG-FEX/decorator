@@ -1,107 +1,141 @@
+@function button-config($config) {
+  @return map_merge((
+          "prefix": $btn-prefix,
+          "type": $btn-type,
+          "size-name": $btn-size-name,
+          "state-name": $btn-state-name,
+          "size": $btn-size,
+          "ustate-name": $btn-ustate-name,
+          "gradient-table": $btn-gradient-table,
+          "grid-size": $btn-grid-size,
+          "bd-color": $btn-bd-color,
+          "bd-size": $btn-bd-size,
+          "font-color": $btn-font-color,
+          "font-size": $btn-font-size,
+          "radius-size": $btn-radius-size,
+          "padding-rl": $btn-padding-rl,
+          "line-height": $btn-line-height,
+          "shadow": $btn-shadow,
+          "bg-color": $btn-bg-color,
+          "bg-url": $btn-bg-url
+  ), $config)
+}
+@mixin adjust-button-height ($config:()){
+  $config: button-config($config);
 
-@mixin adjust-button-height (){
   @include box-sizing(border-box);
   overflow: visible;
 
-  @for $i from 1 through length($btn-size-name) {
-    $szselector: create-selector(nth($btn-size-name, $i), $btn-prefix);
+  @for $i from 1 through length(map_get($config, 'size-name')) {
+    $szselector: create-selector(nth(map_get($config, 'size-name'), $i), map_get($config, 'prefix'));
     &#{$szselector} {
-      @include with-button-ajustment(nth($btn-size, $i), nth($btn-font-size, $i));
+      @include with-button-ajustment(nth(map_get($config, "size"), $i), nth(map_get($config, "font-size"), $i));
     }
   }
 }
 
-@mixin button-state ($i) {
-  $s: nth($btn-gradient-table, $i);
-  @for $j from 1 through length($btn-ustate-name) {
+@mixin button-state ($i, $config:()) {
+  $config: button-config($config);
+
+  $s: nth(map_get($config, "gradient-table"), $i);
+  @for $j from 1 through length(map_get($config, "ustate-name")) {
     $su: nth($s, $j);
-    $uselector: create-u-selector(nth($btn-ustate-name, $j));
+    $uselector: create-u-selector(nth(map_get($config, "ustate-name"), $j));
     &#{$uselector} {
-      @if (length($btn-bd-color) >= $i) {
-        @if (length(nth($btn-bd-color, $i)) >= $j) {
-          border-color: nth(nth($btn-bd-color, $i), $j);
+      @if (length(map_get($config, "bd-color")) >= $i) {
+        @if (length(nth(map_get($config, "bd-color"), $i)) >= $j) {
+          border-color: nth(nth(map_get($config, "bd-color"), $i), $j);
         }
       }
-      @if (length($btn-font-color) >= $i) {
-        @if (length(nth($btn-font-color, $i)) >= $j) {
-          color: nth(nth($btn-font-color, $i), $j);
+      @if (length(map_get($config, "font-color")) >= $i) {
+        @if (length(nth(map_get($config, "font-color"), $i)) >= $j) {
+          color: nth(nth(map_get($config, "font-color"), $i), $j);
+        } @else {
+          //为了不被覆盖，ustate的color必须加上
+          color: nth(nth(map_get($config, "font-color"), $i), 1);
         }
+      } @else {
+        color: map_get($config, "font-color");
       }
-      @if ($btn-type == '' or $btn-type == 'flatten') {
+      @if (map_get($config, "type") == '' or map_get($config, "type") == 'flatten') {
         //增加hover样式
-        @if (length($btn-bg-color) >= $i) {
-          @if (length(nth($btn-bg-color, $i)) >= $j) {
-            background-color: nth(nth($btn-bg-color, $i), $j);
+        @if (length(map_get($config, "bg-color")) >= $i) {
+          @if (length(nth(map_get($config, "bg-color"), $i)) >= $j) {
+            background-color: nth(nth(map_get($config, "bg-color"), $i), $j);
           }
         }
       }
-      @if ($btn-type == '') {
-        background-position: vertical-splites($j - 1 + ($i - 1) * length($btn-ustate-name), $btn-grid-size);
-      } @else if($btn-type == 'gradient') {
+      @if (map_get($config, "type") == '') {
+        background-position: vertical-splites($j - 1 + ($i - 1) * length(map_get($config, "ustate-name")), map_get($config, "grid-size"));
+      } @else if(map_get($config, "type") == 'gradient') {
         @include vertical-gradient(nth($su, 1), nth($su, 2))
       }
     }
   }
 }
-@mixin button-state-mapping ($name) {
-  $i: index($btn-state-name, $name);
+@mixin button-state-mapping ($name, $config:()) {
+  $config: button-config($config);
+
+  $i: index(map_get($config, "state-name"), $name);
   @include button-state($i)
 }
-@mixin button-size ($i) {
-  $l: nth($btn-size, $i) - nth($btn-line-height, $i) - $btn-bd-size * 2;
+@mixin button-size ($i, $config:()) {
+  $config: button-config($config);
+
+  $l: nth(map_get($config, "size"), $i) - nth(map_get($config, "line-height"), $i) - map_get($config, "bd-size") * 2;
   $pd-t: floor($l / 2);
   $pd-b: $l - $pd-t;
-  @include single-line-height(nth($btn-line-height, $i));
+  @include single-line-height(nth(map_get($config, "line-height"), $i));
   padding: {
     top: $pd-t;
     bottom: $pd-b;
   }
-  @if (length($btn-font-size) >= $i) {
-    font-size: nth($btn-font-size, $i);
+  @if (length(map_get($config, "font-size")) >= $i) {
+    font-size: nth(map_get($config, "font-size"), $i);
   }
-  @if (length($btn-padding-rl) >= $i) {
+  @if (length(map_get($config, "padding-rl")) >= $i) {
     padding: {
-      left: nth($btn-padding-rl, $i);
-      right: nth($btn-padding-rl, $i);
+      left: nth(map_get($config, "padding-rl"), $i);
+      right: nth(map_get($config, "padding-rl"), $i);
     }
   }
-  @if (length($btn-radius-size) >= $i) {
-    border-radius: nth($btn-radius-size, $i);
+  @if (length(map_get($config, "radius-size")) >= $i) {
+    border-radius: nth(map_get($config, "radius-size"), $i);
   }
-  @if ($btn-type == '' and length($btn-bg-url) >= $i) {
-    background-image: nth($btn-bg-url, $i);
+  @if (map_get($config, "type") == '' and length(map_get($config, "bg-url")) >= $i) {
+    background-image: nth(map_get($config, "bg-url"), $i);
   }
 }
 
-@mixin button($width: auto) {
+@mixin button($width: auto, $config:()) {
+  $config: button-config($config);
+
   @include button-like();
   white-space: nowrap;
   outline: none;
   overflow-y: hidden;
-  box-shadow: $btn-shadow;
+  box-shadow: map_get($config, "shadow");
   text-align: center;
-  border: $btn-bd-size solid;
+  border: map_get($config, "bd-size") solid;
 
   @if ($width != 'auto') {
-    width: adjust-box-size($width, $btn-bd-size*2);
+    width: adjust-box-size($width, map_get($config, "bd-size")*2);
   }
 
-  @for $i from 1 through length($btn-size-name) {
-    $szselector: create-selector(nth($btn-size-name, $i), $btn-prefix);
+  @for $i from 1 through length(map_get($config, "size-name")) {
+    $szselector: create-selector(nth(map_get($config, "size-name"), $i), map_get($config, "prefix"));
     &#{$szselector} {
-      @include button-size($i);
+      @include button-size($i, $config);
     }
   }
-
-  @for $i from 1 through length($btn-state-name) {
-    $selector: create-selector(nth($btn-state-name, $i), $btn-prefix);
+  @for $i from 1 through length(map_get($config, "state-name")) {
+    $selector: create-selector(nth(map_get($config, "state-name"), $i), map_get($config, "prefix"));
     &#{$selector} {
-      @include button-state($i);
+      @include button-state($i, $config);
     }
   }
 
-
-  &#{create-selector('lg', $btn-prefix)}, &#{create-selector('xlg', $btn-prefix)} {
+  &#{create-selector('lg', map_get($config, "prefix"))}, &#{create-selector('xlg', map_get($config, "prefix"))} {
     font-weight: bold;
   }
 
@@ -133,5 +167,4 @@
       right: 0;
     }
   }
-
 }

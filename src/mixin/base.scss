@@ -1,4 +1,12 @@
-﻿
+﻿@function zoom-list($list, $time) {
+  $result: ();
+  @each $item in $list {
+    $result: join($result, round($item * $time));
+  }
+  @return $result;
+}
+
+
 // 根据包括盒子padding，border的总高宽度计算具体高宽度
 @function adjust-box-size ($size, $padding-size: 10px, $border-size: 0px) {
   @return $size - $padding-size - $border-size;

@@ -1,0 +1,16 @@
+@function img-url($url, $burl: null) {
+  @if ($burl == null) {
+    $burl: $default-img-src-base;
+  }
+  @return url($burl + $url);
+}
+
+@function create-selector($s, $prefix) {
+  @if $s == '' { @return $s}
+  @return $prefix + '-' + $s;
+}
+
+@function create-u-selector($s, $prefix:':') {
+  @if $s == '' { @return $s}
+  @return $prefix + $s;
+}
