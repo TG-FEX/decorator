@@ -1,4 +1,5 @@
-﻿@function zoom-list($list, $time) {
+﻿@charset "UTF-8";
+@function zoom-list($list, $time) {
   $result: ();
   @each $item in $list {
     $result: join($result, round($item * $time));

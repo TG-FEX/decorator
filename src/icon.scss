@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @mixin icon-mapping($s-name, $offset-x:0, $offset-y:0) {
   background-position: vertical-splites-position($icon-map, $s-name, $icon-grid-size, $offset-x, $offset-y);
 }

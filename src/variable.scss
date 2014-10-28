@@ -1,11 +1,10 @@
-$default-img-src-base: 'http://img.tgimg.cn/bbs/topic/master-show/' !default;
+$default-img-src-base: '/' !default;
 $default-line-height: 24px !default;
 $default-font-size: 12px !default;
 
 
 $ui-state-name: '', 'strong', 'info' !default;
 $ui-size-name: '', 'sm', 'lg', 'xlg' !default;
-$ui-height-multiple: 1, 0.786, 1.143, 1.25 !default;
 $ui-font-size: $default-font-size, 12px, 14px, 16px !default;
 $ui-size: 28px, 22px, 32px, 35px !default;
 $ui-line-height: $default-line-height, 18px, 26px, 28px !default;
@@ -28,8 +27,8 @@ $textbox-radius-size: 2px !default;
 $textbox-bd-size: 1px !default;
 $textbox-line-height: $ui-line-height !default;
 
-$select-prefix: $textbox-prefix;
-$select-line-height: zoom-list($textbox-font-size, 16 / 12);
+$select-prefix: $textbox-prefix defaults;
+$select-line-height: zoom-list($textbox-font-size, 16 / 12) defaults;
 
 
 $checklist-interval-size: 5px !default;

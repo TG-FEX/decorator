@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @function textbox-config($config:null){
   $defaults: (
     "prefix": $textbox-prefix,
@@ -12,7 +13,7 @@
     "size": $textbox-size,
     "radius-size": $textbox-radius-size,
     "bd-size": $textbox-bd-size,
-    "line-height": $textbox-line-heightS
+    "line-height": $textbox-line-height
   );
   @if ($config == null) {
     @return $defaults;

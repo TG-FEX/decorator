@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @function button-config($config) {
   @return map_merge((
           "prefix": $btn-prefix,
@@ -51,14 +52,12 @@
         @if (length(nth(map_get($config, "font-color"), $i)) >= $j) {
           color: nth(nth(map_get($config, "font-color"), $i), $j);
         } @else {
-          //为了不被覆盖，ustate的color必须加上
           color: nth(nth(map_get($config, "font-color"), $i), 1);
         }
       } @else {
         color: map_get($config, "font-color");
       }
       @if (map_get($config, "type") == '' or map_get($config, "type") == 'flatten') {
-        //增加hover样式
         @if (length(map_get($config, "bg-color")) >= $i) {
           @if (length(nth(map_get($config, "bg-color"), $i)) >= $j) {
             background-color: nth(nth(map_get($config, "bg-color"), $i), $j);

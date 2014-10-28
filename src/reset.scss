@@ -1,18 +1,18 @@
-@charset "GB2312";
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, dialog, details, em, fieldset, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section { display: block; }
 datalist {display: none;}
 audio, canvas, video { display: inline-block; *display: inline; *zoom:1}
-/* Ç¿ÖÆexpressionäÖÈ¾ */
+/* å¼ºåˆ¶expressionæ¸²æŸ“ */
 html, body { background-image:url(about:blank); background-attachment:fixed; }
-// VMLÀ´ÁË
+// VMLæ¥äº†
 v\:*{behavior: url(#default#VML);}
 html { height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
 strong { font-weight: 900}
 em { font-weight: 900; font-style: italic; }
 mark { background-color: #ff0; }
-/* IE7°´Å¥µÄºÚ±ß
+/* IE7æŒ‰é’®çš„é»‘è¾¹
 input[type=submit],input[type=reset],input[type=button], button{ *filter:chroma(color=#000000);}
 button{ _filter:chroma(color=#000000);}
 */
@@ -37,7 +37,7 @@ sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: b
 sup { top: -0.5em;}
 sub { bottom: -0.25em;}
 em { font-style: normal;}
-/* Í³Ò»ä¯ÀÀÆ÷±íµ¥¶ÔÆë·½Ê½ */
+/* ç»Ÿä¸€æµè§ˆå™¨è¡¨å•å¯¹é½æ–¹å¼ */
 button, input, select {
   margin: 0; vertical-align: baseline; *vertical-align: middle;
 }
@@ -53,12 +53,12 @@ input[type="search"] { -webkit-appearance: textfield; -webkit-box-sizing: conten
 input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
 textarea {
   margin: 0;
-  overflow: auto; /*ÒÆ³ıIE6-9×İÏò¹ö¶¯Ìõ*/
-  vertical-align: top; /* Í³Ò»¶àĞĞÎÄ±¾¶ÔÆë·½Ê½ */
+  overflow: auto; /*ç§»é™¤IE6-9çºµå‘æ»šåŠ¨æ¡*/
+  vertical-align: top; /* ç»Ÿä¸€å¤šè¡Œæ–‡æœ¬å¯¹é½æ–¹å¼ */
   resize: none;
   font-family: inherit;
-  _font-family: \5b8b\4f53; /* IE6±È½ÏÄÔ³é */
-  font-size: inherit; /* »ğºüÃ²ËÆ²»¼Ì³Ğfont-size */
+  _font-family: \5b8b\4f53; /* IE6æ¯”è¾ƒè„‘æŠ½ */
+  font-size: inherit; /* ç«ç‹è²Œä¼¼ä¸ç»§æ‰¿font-size */
 }
 :-moz-placeholder {
   color: #999;
