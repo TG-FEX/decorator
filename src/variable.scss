@@ -47,12 +47,20 @@ $icon-url: img-url('ico.png'), img-url('ico-sm.png'), img-url('ico-lg.png'), img
 $icon-map: edit, ding, tqq, tsina !default;
 
 // button
+
+$btn-font-size: $ui-font-size !default;
+$btn-size-name: $ui-size-name !default;
+$btn-size: $ui-size !default;
+$btn-line-height: $ui-line-height !default;
+$btn-state-name: $ui-state-name !default;
+
+$btn-ustate-name: '', 'hover', 'active' !default;
+
 $btn-grid-size: 40px !default;
 $btn-bd-size: 1px !default;
 $btn-radius-size: 2px !default;
 $btn-prefix: '.btn' !default;
-$btn-state-name: '', 'primary', 'info' !default;
-$btn-shadow: 0 1px 1px 0 rgba(0,0,0,.2) !default;
+$btn-shadow: ((0 1px 1px 0 rgba(0,0,0,.2)), none) !default;
 
 $btn-bg-color: #F3F3F3, #37BD6F, #FFE9E9 !default;
 $btn-font-color: #555, #FFF, #D96458 !default;
@@ -60,15 +68,8 @@ $btn-bd-color:
 darken(nth($btn-bg-color, 1), 10%),
 darken(nth($btn-bg-color, 2), 10%),
 darken(nth($btn-bg-color, 3), 10%) !default;
-$btn-ustate-name: '', 'hover', 'active' !default;
 
-
-$btn-font-size: $ui-font-size !default;
 $btn-padding-rl: 1em, .75em, 1.2em, 2em !default;
-
-$btn-size-name: $ui-size-name !default;
-$btn-size: $ui-size !default;
-$btn-line-height: $ui-line-height !default;
 
 $btn-bg-url:
 img-url('btn.png'),

@@ -1,6 +1,6 @@
 {
     "name": "decorator",
-    "version": "0.7",
+    "version": "0.7.1",
     "main": [
         "src/decorator.scss"
     ],

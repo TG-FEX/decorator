@@ -1,19 +1,19 @@
 @charset "UTF-8";
 @function textbox-config($config:null){
   $defaults: (
-    "prefix": $textbox-prefix,
-    "placeholder-color": $textbox-placeholder-color,
-    "state-name": $textbox-state-name,
-    "bd-color": $textbox-bd-color,
-    "bg-color": $textbox-bg-color,
-    "font-color": $textbox-font-color,
-    "font-size": $textbox-font-size,
-    "padding-rl": $textbox-padding-rl,
-    "size-name": $textbox-size-name,
-    "size": $textbox-size,
-    "radius-size": $textbox-radius-size,
-    "bd-size": $textbox-bd-size,
-    "line-height": $textbox-line-height
+          "prefix": $textbox-prefix,
+          "placeholder-color": $textbox-placeholder-color,
+          "state-name": $textbox-state-name,
+          "bd-color": $textbox-bd-color,
+          "bg-color": $textbox-bg-color,
+          "font-color": $textbox-font-color,
+          "font-size": $textbox-font-size,
+          "padding-rl": $textbox-padding-rl,
+          "size-name": $textbox-size-name,
+          "size": $textbox-size,
+          "radius-size": $textbox-radius-size,
+          "bd-size": $textbox-bd-size,
+          "line-height": $textbox-line-height
   );
   @if ($config == null) {
     @return $defaults;
@@ -22,8 +22,8 @@
 }
 @function select-config($config){
   $defaults: map_merge(textbox-config(), (
-        "prefix": $select-prefix,
-        "line-height": $select-line-height
+          "prefix": $select-prefix,
+          "line-height": $select-line-height
   ));
   @if ($config == null: null) {
     @return $defaults;
@@ -34,21 +34,7 @@
 @mixin placeholder($config:()){
   $config: textbox-config($config);
   $color: map_get($config, 'placeholder-color');
-  &::-moz-placeholder {
-    color: $color !important;
-    opacity: 1;
-  }
-  &:-moz-placeholder {
-    color: $color !important;
-    opacity: 1;
-  }
-  &::-webkit-input-placeholder {
-    color: $color !important;
-  }
-  &:-ms-input-placeholder {
-    color: $color !important;
-  }
-  &.placeholder {color: $color !important;}
+  @include placeholder-color($color);
 }
 
 
@@ -103,21 +89,9 @@
   $config: textbox-config($config);
   $line-height: nth(map_get($config, 'line-height'), $i);
   $l: nth(map_get($config, 'size'), $i) - $line-height - map_get($config, 'bd-size') * 2;
-  $pd-t: floor($l / 2);
-  $pd-b: $l - $pd-t;
-  line-height: $line-height;
-  padding: {
-    top: $pd-t;
-    bottom: $pd-b;
-  }
+  padding:  $l / 2;
   @if (length(map_get($config, 'font-size')) >= $i) {
     font-size: nth(map_get($config, 'font-size'), $i);
-  }
-  @if (length(map_get($config, 'padding-rl')) >= $i) {
-    padding: {
-      left: nth(map_get($config, 'padding-rl'), $i);
-      right: nth(map_get($config, 'padding-rl'), $i);
-    };
   }
 }
 @mixin textbox-state-mapping($state, $config:()){
@@ -176,6 +150,12 @@
     $szselector: create-selector(nth(map_get($config, 'size-name'), $i), map_get($config, 'prefix'));
     &#{$szselector} {
       height: nth(map_get($config, 'line-height'), $i);
+      @if (length(map_get($config, 'padding-rl')) >= $i) {
+        padding: {
+          left: nth(map_get($config, 'padding-rl'), $i);
+          right: nth(map_get($config, 'padding-rl'), $i);
+        }
+      }
     }
   }
 }
@@ -196,10 +176,15 @@
     $size: nth(map_get($config, 'size'), $i);
     $t: $size / 20px;
     &#{$szselector} {
+      height: nth(map_get($config, 'line-height'), $i);
+      @if (length(map_get($config, 'padding-rl')) >= $i) {
+        padding-left: nth(map_get($config, 'padding-rl'), $i);
+      }
       @include select-place-middle($size, false);
       @include fix-ie7-select-height($size, nth(map_get($config, 'font-size'), $i));
     }
   }
+
 }
 
 @mixin checkbox($size: 13px) {

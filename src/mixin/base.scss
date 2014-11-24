@@ -1,4 +1,13 @@
 ﻿@charset "UTF-8";
+@function remove-nth ($list, $index){
+  $result: ();
+  @for $i from 1 to length($list) {
+    @if ($i != $index) {
+      $result: append($result, nth($list, $i));
+    }
+  }
+  @return $result;
+}
 @function zoom-list($list, $time) {
   $result: ();
   @each $item in $list {
