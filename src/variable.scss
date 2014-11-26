@@ -27,8 +27,8 @@ $textbox-radius-size: 2px !default;
 $textbox-bd-size: 1px !default;
 $textbox-line-height: $ui-line-height !default;
 
-$select-prefix: $textbox-prefix defaults;
-$select-line-height: zoom-list($textbox-font-size, 16 / 12) defaults;
+$select-prefix: $textbox-prefix !default;
+$select-line-height: zoom-list($textbox-font-size, 16 / 12) !default;
 
 
 $checklist-interval-size: 5px !default;
