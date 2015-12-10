@@ -13,13 +13,14 @@
             "bd-size": $btn-bd-size,
             "font-color": $btn-font-color,
             "font-size": $btn-font-size,
+            "font-weight": $btn-font-weight,
             "radius-size": $btn-radius-size,
             "padding-rl": $btn-padding-rl,
             "line-height": $btn-line-height,
             "shadow": $btn-shadow,
             "bg-color": $btn-bg-color,
             "bg-url": $btn-bg-url
-    ), $config)
+    ), $config:())
 }
 
 @mixin adjust-button-height($config: ()) {
@@ -35,6 +36,7 @@
         }
     }
 }
+/*
 
 @mixin mix-list($list, $l) {
     @if (length($l) >= nth($l, 1)) {
@@ -47,6 +49,7 @@
         }
     }
 }
+*/
 
 @mixin button-state($i, $config: ()) {
     $config: button-config($config);
@@ -107,6 +110,9 @@
     @if (length(map_get($config, "font-size")) >= $i) {
         font-size: nth(map_get($config, "font-size"), $i);
     }
+    @if (length(map_get($config, "font-weight")) >= $i) {
+        font-weight: nth(map_get($config, "font-weight"), $i);
+    }
     @if (length(map_get($config, "padding-rl")) >= $i) {
         padding: {
             left: nth(map_get($config, "padding-rl"), $i);
@@ -127,7 +133,7 @@
     @include button-like();
     white-space: nowrap;
     outline: none;
-    overflow-y: hidden;
+    overflow: hidden;
     box-shadow: map_get($config, "shadow");
     text-align: center;
     border: map_get($config, "bd-size") solid;
@@ -147,10 +153,6 @@
         &#{$selector} {
             @include button-state($i, $config);
         }
-    }
-
-    &#{create-selector('lg', map_get($config, "prefix"))}, &#{create-selector('xlg', map_get($config, "prefix"))} {
-        font-weight: bold;
     }
 
     &:hover {

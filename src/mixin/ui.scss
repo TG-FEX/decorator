@@ -7,7 +7,7 @@
 
 @function create-selector($s, $prefix) {
   @if $s == '' { @return $s}
-  @return $prefix + '-' + $s;
+  @return '.' + $prefix + '-' + $s;
 }
 
 @function create-u-selector($s, $prefix:':') {

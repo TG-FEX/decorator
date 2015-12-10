@@ -5,11 +5,12 @@
   box-shadow: 0 0 5px $effect-grow-color !important;
 }
 
-@mixin disabled {
-  filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+@mixin disabled($grayscale: 1, $opacity: 1) {
+  filter: unquote('progid:DXImageTransform.Microsoft.BasicImage(grayscale=' + $grayscale + ') alpha(opacity=' + $opacity * 100 + ')');
   color: #A0A0A0;
-  -webkit-filter: grayscale(100%);
+  -webkit-filter: grayscale($grayscale * 100%);
   cursor: not-allowed;
+  opacity: $opacity
 }
 
 @mixin error {

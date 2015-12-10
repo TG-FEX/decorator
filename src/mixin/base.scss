@@ -33,6 +33,14 @@
   }
 }
 
+// 获取第n个元素或者第一个
+@function nth-or-first($list, $i){
+  @if length($list) < $i {
+    $i: 1;
+  }
+  @return nth($list, $i)
+}
+
 // 根据包括盒子padding，border的总高宽度计算具体高宽度
 @function adjust-box-size ($size, $padding-size: 10px, $border-size: 0px) {
   @return $size - $padding-size - $border-size;
@@ -190,7 +198,7 @@
   opacity: $value;
   filter: alpha(Opacity=$value*100);
 }
-@mixin bgcolor-transparent($rgba, $blank: url('./blank.png')) {
+@mixin bgcolor-transparent($rgba, $blank: url(about:blank)) {
   background-color: $rgba;
   background-image: $blank;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#{ie-hex-str($rgba)}', endColorstr='#{ie-hex-str($rgba)}');

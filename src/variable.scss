@@ -6,13 +6,15 @@ $default-font-size: 12px !default;
 $ui-state-name: '', 'strong', 'info' !default;
 $ui-size-name: '', 'sm', 'lg', 'xlg' !default;
 $ui-font-size: $default-font-size, 12px, 14px, 16px !default;
+$ui-font-weight: 400, 400, 400, 900 !default;
 $ui-size: 28px, 22px, 32px, 35px !default;
 $ui-line-height: $default-line-height, 18px, 26px, 28px !default;
+$ui-radius-size: 2px !default;
 
 
 $textbox-placeholder-color: #DDD !default;
 $textbox-state-name: '', 'error' !default;
-$textbox-prefix: '.txtbox' !default;
+$textbox-prefix: 'txtbox' !default;
 $textbox-bd-color: #CCC, #F00 !default;
 $textbox-bg-color: #FFF, #FFE9E9 !default;
 $textbox-font-color: #555, #F00 !default;
@@ -23,7 +25,7 @@ $textbox-padding-rl: .5em, .5em, .75em, 1em !default;
 
 $textbox-size-name: $ui-size-name !default;
 $textbox-size: $ui-size !default;
-$textbox-radius-size: 2px !default;
+$textbox-radius-size: $ui-radius-size !default;
 $textbox-bd-size: 1px !default;
 $textbox-line-height: $ui-line-height !default;
 
@@ -32,15 +34,15 @@ $select-line-height: zoom-list($textbox-font-size, 16 / 12) !default;
 
 
 $checklist-interval-size: 5px !default;
-$checklist-prefix: '.cklist' !default;
+$checklist-prefix: 'cklist' !default;
 
-$form-vertical-prefix: '.frm-v' !default;
+$form-vertical-prefix: 'frm-v' !default;
 $effect-grow-color: #799bd2 !default;
 
 // icon
 
 $icon-grid-size: 40px !default;
-$icon-prefix: '.ico' !default;
+$icon-prefix: 'ico' !default;
 $icon-size-name: $ui-size-name !default;
 $icon-size: 16px, 12px, 22px, 36px !default;
 $icon-url: img-url('ico.png'), img-url('ico-sm.png'), img-url('ico-lg.png'), img-url('ico-xlg.png') !default;
@@ -49,6 +51,7 @@ $icon-map: edit, ding, tqq, tsina !default;
 // button
 
 $btn-font-size: $ui-font-size !default;
+$btn-font-weight: $ui-font-weight !default;
 $btn-size-name: $ui-size-name !default;
 $btn-size: $ui-size !default;
 $btn-line-height: $ui-line-height !default;
@@ -58,8 +61,8 @@ $btn-ustate-name: '', 'hover', 'active' !default;
 
 $btn-grid-size: 40px !default;
 $btn-bd-size: 1px !default;
-$btn-radius-size: 2px !default;
-$btn-prefix: '.btn' !default;
+$btn-radius-size: $ui-radius-size !default;
+$btn-prefix: 'btn' !default;
 $btn-shadow: ((0 1px 1px 0 rgba(0,0,0,.2)), none) !default;
 
 $btn-bg-color: #F3F3F3, #37BD6F, #FFE9E9 !default;
@@ -77,7 +80,7 @@ img-url('btn-sm.png'),
 img-url('btn-lg.png'),
 img-url('btn-xlg.png') !default;
 
-$btn-type: '';
+$btn-type: '' !default;
 //$btn-type: 'gradient';
 $btn-gradient-table:
         ((#2899DF, #3598DC),(#027FC8, #027FC8),(#027FC8, #027FC8)),
@@ -97,7 +100,7 @@ $element-menu-interval: 10px !default;
 
 //UI
 $alert-state-name: '', 'error' !default;
-$alert-prefix: '.alert' !default;
+$alert-prefix: 'alert' !default;
 $alert-size-name: '', 'sm', 'lg', 'xlg' !default;
 
 $alert-bd-color: #CCC, #F00 !default;

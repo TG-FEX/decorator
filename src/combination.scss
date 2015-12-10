@@ -10,19 +10,32 @@
   @for $i from 1 through length($textbox-size-name) {
     $szselector: create-selector(nth($textbox-size-name, $i), $checklist-prefix);
     &#{$szselector} {
-      line-height: nth($textbox-size, $i);
-      font-size: nth($textbox-font-size, $i);
-    }
-    &#{$szselector} label {
-      margin-right: nth($textbox-padding-rl, $i);
-    }
-    &#{$szselector} input {
-      @include place-middle($size, nth($textbox-size, $i));
-      margin-right: nth($textbox-padding-rl, $i);
+      @if (length($textbox-size) >= $i) {
+        line-height: nth($textbox-size, $i);
+      }
+      @if (length($textbox-font-size) >= $i) {
+        font-size: nth($textbox-font-size, $i);
+      }
+      label {
+        @if (length($textbox-padding-rl) >= $i) {
+          margin-right: nth($textbox-padding-rl, $i);
+        }
+      }
+      input {
+        @if (length($textbox-size) >= $i) {
+          @include place-middle($size, nth($textbox-size, $i));
+        }
+        @if (length($textbox-padding-rl) >= $i) {
+          margin-right: nth($textbox-padding-rl, $i);
+        }
+      }
     }
   }
 }
 @mixin form-vertical {
+  table {
+    width: 100%;
+  }
   th {
     text-align: right;
     font-weight: lighter;
@@ -35,7 +48,7 @@
   input, select {
     vertical-align: top;
   }
-  $label-width: nth($form-vertical-label-width, 1);
+
   @for $i from 1 through length($textbox-size-name) {
     $szselector: create-selector(nth($textbox-size-name, $i), $form-vertical-prefix);
     $size: nth($textbox-size, $i);
@@ -43,6 +56,7 @@
       font-size: nth($textbox-font-size, $i);
     }
     &#{$szselector} th {
+      white-space: nowrap;
       @if (length($form-vertical-label-padding-r) >= $i) {
         padding-right: nth($form-vertical-label-padding-r, $i);
       }
@@ -66,16 +80,13 @@
       @if (length($form-vertical-menu-margin-t) >= $i) {
         margin-top: nth($form-vertical-menu-margin-t, $i);
       }
-      @if (length($form-vertical-label-padding-r) >= $i) {
-        @if (length($form-vertical-label-width) > $i) {
-          $label-width: nth($form-vertical-label-width, $i)
-        }
-        margin-left: $label-width + nth($form-vertical-label-padding-r, $i);
+      @if (length($form-vertical-label-width) >= $i or length($form-vertical-label-padding-r) >= $i) {
+        margin-left: nth-or-first($form-vertical-label-width, $i) + nth-or-first($form-vertical-label-padding-r, $i)
       }
     }
   }
-
 }
+
 @mixin element-group {
   a, input, output, button, select {
     border-right-width: 0;
@@ -87,30 +98,46 @@
     box-shadow: none;
   }
   a, button{
-    &.first-item {
-      border-radius: $btn-radius-size 0 0 $btn-radius-size;
-    }
-    &.last-item {
-      border-radius: 0 $btn-radius-size $btn-radius-size 0;
+    @for $i from 1 through length($btn-size-name) {
+      &#{create-selector(nth($btn-size-name, $i), $btn-prefix)} {
+        @if (length($btn-radius-size) >= $i) {
+          &.first-item {
+            border-radius: nth($btn-radius-size, $i) 0 0 nth($btn-radius-size, $i);
+          }
+          &.last-item {
+            border-radius: 0 nth($btn-radius-size, $i) nth($btn-radius-size, $i) 0;
+          }
+        }
+        @if (length($btn-bd-size) >= $i) {
+          &.last-item {
+            border-right-width: nth($btn-bd-size, $i);
+          }
+        }
+      }
+
     }
   }
   input, output, select {
-    &.first-item {
-      border-radius: $textbox-radius-size 0 0 $textbox-radius-size;
+
+    @for $i from 1 through length($textbox-size-name) {
+      &#{create-selector(nth($textbox-size-name, $i), $textbox-prefix)} {
+        @if (length($textbox-radius-size) >= $i) {
+          &.first-item {
+            border-radius: nth($textbox-radius-size, $i) 0 0 nth($textbox-radius-size, $i);
+          }
+          &.last-item {
+            border-radius: 0 nth($textbox-radius-size, $i) nth($textbox-radius-size, $i) 0;
+          }
+        }
+        @if (length($textbox-bd-size) >= $i) {
+          &.last-item {
+            border-right-width: nth($textbox-bd-size, $i);
+          }
+        }
+      }
+
     }
-    &.last-item {
-      border-radius: 0 $textbox-radius-size $textbox-radius-size 0;
-    }
-  }
-  a, button{
-    &.last-item {
-      border-right-width: $btn-bd-size;
-    }
-  }
-  input, output, select {
-    &.last-item {
-      border-right-width: $textbox-bd-size;
-    }
+
   }
 }
 @mixin add-shadow-to-element-group {
@@ -121,9 +148,9 @@
 @mixin element-menu($menu-on-right: false) {
   @if ($menu-on-right == true) {
     margin-right: -1 * $element-menu-interval;
-    vertical-align: right;
+    text-align: right;
   } @else {
-    vertical-align: left;
+    text-align: left;
   }
   input, a, button, select {
     margin-right: $element-menu-interval;

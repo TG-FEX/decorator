@@ -150,6 +150,10 @@
     $szselector: create-selector(nth(map_get($config, 'size-name'), $i), map_get($config, 'prefix'));
     &#{$szselector} {
       height: nth(map_get($config, 'line-height'), $i);
+      &.block {
+        width: 100%;
+        height: nth(map_get($config, 'size'), $i);
+      }
       @if (length(map_get($config, 'padding-rl')) >= $i) {
         padding: {
           left: nth(map_get($config, 'padding-rl'), $i);
@@ -165,6 +169,10 @@
   cursor: text;
   @include textbox-like($width, $config);
   @include placeholder($config);
+  &.block {
+    display: block;
+    @include box-sizing(border-box);
+  }
 }
 
 @mixin select($width: auto, $config:()) {
@@ -176,7 +184,9 @@
     $size: nth(map_get($config, 'size'), $i);
     $t: $size / 20px;
     &#{$szselector} {
-      height: nth(map_get($config, 'line-height'), $i);
+      $line-height: nth(map_get($config, 'line-height'), $i);
+      height: $line-height;
+      line-height: $line-height;
       @if (length(map_get($config, 'padding-rl')) >= $i) {
         padding-left: nth(map_get($config, 'padding-rl'), $i);
       }
